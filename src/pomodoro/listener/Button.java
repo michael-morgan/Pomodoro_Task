@@ -61,16 +61,19 @@ public class Button implements ActionListener
                 {
                     frame.taskList.add(0, frame.taskInput.getText());
                     frame.taskOne.setText(frame.taskList.get(0));
+                    System.out.println(frame.taskList.get(0));
                 }
                 else if(frame.taskTwo.getText().equals(""))
                 {
                     frame.taskList.add(1, frame.taskInput.getText());
                     frame.taskTwo.setText(frame.taskList.get(1));
+                    System.out.println(frame.taskList.get(1));
                 }
                 else if(frame.taskThree.getText().equals(""))
                 {
                     frame.taskList.add(2, frame.taskInput.getText());
                     frame.taskThree.setText(frame.taskList.get(2));
+                    System.out.println(frame.taskList.get(2));
                 }
             }
             else if(frame.taskList.size() == 3)
@@ -91,18 +94,18 @@ public class Button implements ActionListener
                 else if(e.getSource().equals(frame.completeTaskTwo) && 
                         !frame.taskTwo.getText().equals(""))
                 {
-                    frame.taskList.remove(1);
+                    frame.taskList.remove(0);
                     frame.taskTwo.setText("");
                 }
                 else if(e.getSource().equals(frame.completeTaskThree) && 
                         !frame.taskThree.getText().equals(""))
                 {
-                    frame.taskList.remove(2);
+                    frame.taskList.remove(0);
                     frame.taskThree.setText("");
                 }
                 else
                 {
-                    JOptionPane.showMessageDialog(null, "Task already completed!");
+                    JOptionPane.showMessageDialog(null, "Task empty, add a task!");
                 }
             }
             else if(frame.taskList.size() == 0)
@@ -154,13 +157,13 @@ public class Button implements ActionListener
                 else if(e.getSource().equals(frame.removeTaskTwo) && 
                         !frame.taskTwo.getText().equals(""))
                 {
-                    frame.taskList.remove(1);
+                    frame.taskList.remove(0);
                     frame.taskTwo.setText("");
                 }
                 else if(e.getSource().equals(frame.removeTaskThree) && 
                         !frame.taskThree.getText().equals(""))
                 {
-                    frame.taskList.remove(2);
+                    frame.taskList.remove(0);
                     frame.taskThree.setText("");
                 }
                 else

@@ -137,8 +137,11 @@ public class Frame extends JFrame implements Runnable
         taskInput = new JTextField();
         taskInput.setPreferredSize(new Dimension(400, 25));
         taskOne = new JTextField();
+        taskOne.setEditable(false);
         taskTwo = new JTextField();
+        taskTwo.setEditable(false);
         taskThree = new JTextField();
+        taskThree.setEditable(false);
         
         start = new JButton("Start");
         start.addActionListener(button);
