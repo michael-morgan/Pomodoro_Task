@@ -5,11 +5,13 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.Toolkit;
 import java.util.ArrayList;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.BevelBorder;
@@ -21,7 +23,7 @@ import pomodoro.listener.Button;
  */
 public class Frame extends JFrame implements Runnable
 {
-    private final Dimension SIZE = new Dimension(800, 600);
+    private final Dimension SIZE = new Dimension(600, 500);
     
     public Thread loop;
     public boolean run, timer, working;
@@ -102,23 +104,23 @@ public class Frame extends JFrame implements Runnable
     private void addComponents()
     {
         panel = new JPanel();
-        panel.setPreferredSize(new Dimension(800, 600));
+        panel.setPreferredSize(new Dimension(600, 500));
         topPanel = new JPanel();
-        topPanel.setPreferredSize(new Dimension(800, 150));
+        topPanel.setPreferredSize(new Dimension(600, 150));
         middlePanel = new JPanel();
-        middlePanel.setPreferredSize(new Dimension(800, 350));
+        middlePanel.setPreferredSize(new Dimension(600, 250));
         middleTopPanel = new JPanel();
-        middleTopPanel.setPreferredSize(new Dimension(800, 50));
+        middleTopPanel.setPreferredSize(new Dimension(600, 50));
         middleCenterPanel = new JPanel();
-        middleCenterPanel.setPreferredSize(new Dimension(800, 50));
+        middleCenterPanel.setPreferredSize(new Dimension(600, 50));
         middleBottomPanel = new JPanel(new GridLayout(3, 4));
         bottomPanel = new JPanel();
-        bottomPanel.setPreferredSize(new Dimension(800, 100));
+        bottomPanel.setPreferredSize(new Dimension(600, 100));
         topLeftPanel = new JPanel();
         topTopPanel = new JPanel();
-        topTopPanel.setPreferredSize(new Dimension(600, 100));
+        topTopPanel.setPreferredSize(new Dimension(400, 100));
         topBottomPanel = new JPanel();
-        topBottomPanel.setPreferredSize(new Dimension(600, 100));
+        topBottomPanel.setPreferredSize(new Dimension(400, 100));
         topRightPanel = new JPanel();
         
         time = new JLabel(minutes + " : " + seconds);
@@ -129,7 +131,7 @@ public class Frame extends JFrame implements Runnable
         tasks = new JLabel("Tasks");
         tasks.setFont(new Font("Arial", Font.BOLD, 36));
         currentTask = new JLabel("Status:  " + "  |  Task:  " + taskInfo);
-        currentTask.setPreferredSize(new Dimension(200, 25));
+        currentTask.setPreferredSize(new Dimension(250, 25));
         currentTask.setBorder(BorderFactory.createBevelBorder(BevelBorder.LOWERED, Color.GRAY, Color.GRAY));
         
         taskInput = new JTextField();
@@ -201,7 +203,7 @@ public class Frame extends JFrame implements Runnable
         middlePanel.add(middleCenterPanel, BorderLayout.CENTER);
         middlePanel.add(middleBottomPanel, BorderLayout.SOUTH);
         
-        bottomPanel.add(currentTask, BorderLayout.SOUTH);
+        bottomPanel.add(currentTask, BorderLayout.NORTH);
         
         panel.add(topPanel, BorderLayout.NORTH);
         panel.add(middlePanel, BorderLayout.CENTER);
@@ -220,22 +222,42 @@ public class Frame extends JFrame implements Runnable
         while(run)
         {
             if(timer)
-            {
-                if(seconds == 0)
+            {   
+                if(!(minutes == 0 && seconds == 0))
                 {
-                    minutes--;
-                    seconds = 60;
-                }
+                    if(seconds == 0)
+                    {
+                        minutes--;
+                        seconds = 60;
+                    }
 
-                seconds--;
-                time.setText(minutes + " : " + seconds);
-                try
-                {
-                    Thread.sleep(960);
+                    seconds--;
+                    time.setText(minutes + " : " + seconds);
+                    try
+                    {
+                        Thread.sleep(960);
+                    }
+                    catch(Exception e)
+                    {
+                        e.printStackTrace();
+                    }
                 }
-                catch(Exception e)
+                else
                 {
-                    e.printStackTrace();
+                    if(working)
+                    {
+                        Toolkit.getDefaultToolkit().beep();
+                        minutes = 25;
+                        seconds = 0;
+                        JOptionPane.showMessageDialog(null, "Times up! Task completed!");
+                    }
+                    else if(!working)
+                    {
+                        Toolkit.getDefaultToolkit().beep();
+                       minutes = 5;
+                       seconds = 0;
+                       JOptionPane.showMessageDialog(null, "Times up! Rest completed!"); 
+                    }
                 }
             }
             

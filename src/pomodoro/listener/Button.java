@@ -12,7 +12,6 @@ import pomodoro.frame.Frame;
 public class Button implements ActionListener
 {
     private Frame frame;
-    private JOptionPane pane;
     
     /**
      * Button constructor
@@ -21,7 +20,6 @@ public class Button implements ActionListener
     public Button(Frame frame)
     {
         this.frame = frame;
-        pane = new JOptionPane();
     } //end of Button constructor
     
     /**
@@ -77,7 +75,7 @@ public class Button implements ActionListener
             }
             else if(frame.taskList.size() == 3)
             {
-                pane.showMessageDialog(null, "Tasks are full, complete/remove a task!");
+                JOptionPane.showMessageDialog(null, "Tasks are full, complete/remove a task!");
             }
         }
         if(e.getActionCommand().toString().equalsIgnoreCase("complete"))
@@ -104,13 +102,13 @@ public class Button implements ActionListener
                 }
                 else
                 {
-                    pane.showMessageDialog(null, "Task already completed!");
+                    JOptionPane.showMessageDialog(null, "Task already completed!");
                 }
             }
             else if(frame.taskList.size() == 0)
             {
                 frame.taskInfo = "None";
-                pane.showMessageDialog(null, "Tasks are empty, add a task!");
+                JOptionPane.showMessageDialog(null, "Tasks are empty, add a task!");
             }
         }
         if(e.getActionCommand().toString().equalsIgnoreCase("set"))
@@ -134,13 +132,13 @@ public class Button implements ActionListener
                 }
                 else
                 {
-                    pane.showMessageDialog(null, "Task is empty, add a task!");
+                    JOptionPane.showMessageDialog(null, "Task is empty, add a task!");
                 }
             }
             else if(frame.taskList.size() == 0)
             {
                 frame.taskInfo = "None";
-                pane.showMessageDialog(null, "Tasks are empty, add a task!");
+                JOptionPane.showMessageDialog(null, "Tasks are empty, add a task!");
             }
         }
         if(e.getActionCommand().toString().equalsIgnoreCase("remove"))
@@ -167,13 +165,13 @@ public class Button implements ActionListener
                 }
                 else
                 {
-                    pane.showMessageDialog(null, "Task is empty, add a task!");
+                    JOptionPane.showMessageDialog(null, "Task is empty, add a task!");
                 }
             }
             else if(frame.taskList.size() == 0)
             {
                 frame.taskInfo = "None";
-                pane.showMessageDialog(null, "Tasks are empty, add a task!");
+                JOptionPane.showMessageDialog(null, "Tasks are empty, add a task!");
             }
         }   
     } //end of actionPerformed method
